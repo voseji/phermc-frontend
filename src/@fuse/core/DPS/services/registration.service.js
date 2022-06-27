@@ -5,6 +5,10 @@ export default class RegistrationService{
         return BackendAPI.get('/registration');
     }
 
+    static getAllOneRegistration(){
+        return BackendAPI.get('/registration/{eID}');
+    }    
+
     static createRegistration(payload){
         return BackendAPI.post('/registration',payload);
     }

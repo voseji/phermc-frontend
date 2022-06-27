@@ -63,7 +63,7 @@ const navigationConfig = [
         ],
       },
       {
-        id: '1',
+        id: 'inspection',
         title: 'Inspection',
         translate: 'INSPECTION',
         type: 'collapse',
@@ -74,7 +74,7 @@ const navigationConfig = [
             id: 'new-reg',
             title: 'Register New Inspection',
             type: 'item',
-            url: 'dps/registration/new_inspection',
+            url: 'dps/inspection/new_inspection',
             end: true,
             icon: 'add_location',
           },
@@ -110,7 +110,7 @@ const navigationConfig = [
             icon: 'alt_route',
           },
           {
-            id: 'procesing_stage',
+            id: 'processing_stage',
             title: 'Processing Stage',
             type: 'item',
             url: 'dps/settings/processing_stage',

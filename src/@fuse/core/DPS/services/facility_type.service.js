@@ -1,6 +1,6 @@
 import { BackendAPI } from "./api.utility";
 
-export default class FacilityStatusService{
+export default class FacilityTypeService{
     static getAllFacilityType(){
         return BackendAPI.get('/facility_type');
     }

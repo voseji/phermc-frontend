@@ -24,7 +24,7 @@ export const Facilities = () =>{
   const columns = [
     // { label: "SN", name: "serialNumber" },
     {
-      label: "Date Created", name: "created_at", options: {
+      label: "Date Captured", name: "created_at", options: {
         customBodyRender: (v) => {
           return <>{moment(v).format('YYYY-MM-DD')}</>
         }
@@ -33,6 +33,7 @@ export const Facilities = () =>{
     { label: "eID", name: "eID" },
     { label: "KIV", name: "KIV" },
     { label: "Rgistration Number", name: "registrationNumber" },
+    { label: "Facility Name", name: "facilityName" },
     // { label: "Manufacturer", name: "manufacturerId" },
     // { label: "Landed Cost", name: "landedCost", options: {customBodyRender: (value) => {
     //   return `N${numeral(value).format('0,0.00')}`
@@ -70,6 +71,7 @@ export const Facilities = () =>{
                 registration.eID,
                 registration.KIV,
                 registration.registrationNumber,
+                registration.facilityName,
            
               ])}
               options={{
