@@ -1,5 +1,3 @@
-// import Facilities from '@fuse/core/DPS/Facilities';
-// import { ProcessingStage } from '@fuse/core/DPS/ProcessingStage';
 import { lazy } from 'react';
 
 const NewRegistration = lazy(() => import('./new_registration'));
@@ -12,10 +10,12 @@ const FacilityType = lazy(() => import('./facility_type'));
 const NewProcessingStage = lazy(() => import('./new_processing_stage'));
 const ProcessingStage = lazy(() => import('./processing_stage'));
 const NewInspection = lazy(() => import('./new_inspection'));
-const RightSidebar = lazy(() => import('./right-sidebar'));
-const RightSidebar2 = lazy(() => import('./right-sidebar-2'));
-const RightSidebarTabbed = lazy(() => import('./right-sidebar-tabbed'));
-const RightSidebar2Tabbed = lazy(() => import('./right-sidebar-2-tabbed'));
+const NewInspectionNextpage = lazy(() => import('./new_inspection_next_page'));
+const Inspections = lazy(() => import('./inspections'));
+const InspectionType = lazy(() => import('./inspection_type'));
+const NewInspectionType = lazy(() => import('./new_inspection_type'));
+const NewTeam = lazy(() => import('./new_team'));
+const ListTeam = lazy(() => import('./list_teams'));
 
 const cardedLayoutRoutes = [
   {
@@ -59,16 +59,28 @@ const cardedLayoutRoutes = [
     element: <NewInspection />,
   },
   {
-    path: 'ui/page-layouts/carded/right-sidebar-tabbed',
-    element: <RightSidebarTabbed />,
+    path: 'dps/inspection/new_inspection_next_page',
+    element: <NewInspectionNextpage />,
   },
   {
-    path: 'ui/page-layouts/carded/right-sidebar-2',
-    element: <RightSidebar2 />,
+    path: 'dps/inspection/list',
+    element: <Inspections />,
   },
   {
-    path: 'ui/page-layouts/carded/right-sidebar-2-tabbed',
-    element: <RightSidebar2Tabbed />,
+    path: 'dps/settings/inspection_type',
+    element: <InspectionType />,
+  },
+  {
+    path: 'dps/settings/new_inspection_type',
+    element: <NewInspectionType />,
+  },
+  {
+    path: 'dps/settings/teams',
+    element: <NewTeam />,
+  },
+  {
+    path: 'dps/settings/list_teams',
+    element: <ListTeam />,
   },
 ];
 

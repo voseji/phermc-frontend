@@ -6,14 +6,12 @@ import Typography from "@mui/material/Typography";
 import {useForm, Controller} from "react-hook-form";
 import React, { useState, useEffect } from 'react';
 import RegistrationService from './services/registration.service';
-import FacilityStatusService from './services/facility_status.service';
-import FacilityTypeService from './services/facility_type.service';
-import ProcessingStageService from './services/processingstage.service';
 import { useSnackbar } from 'notistack';
 import { handleAPIError } from './services/api.utility';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
-
+import { useNavigate, useParams } from 'react-router-dom'
+import { BackendAPI } from './services/api.utility';
 const defaultValues = {
   Native     : "",
   TextField  : "",
@@ -27,7 +25,7 @@ const defaultValues = {
 
 
 
-function NewRegistration() {
+function NewInspectionNextPage() {
   const {
     handleSubmit,
     register,
@@ -41,10 +39,10 @@ function NewRegistration() {
 
 
 
-// const [eID, setManufacturers] = useState([])
+
 const [facilitystatuses, setFacilityStatuses] = useState([])
 const [facilitytypes, setFacilityTypes] = useState([])
-const [processingstages, setProcessingStages] = useState([])
+// const [oneregistration, setOneRegistration] = useState([])
 const [KIV, setKIV] = useState("")
 const [registrationNumber, setRegistrationNumber] = useState("")
 const [facilityName, setFacilityName] = useState("");
@@ -96,44 +94,26 @@ const CreateOneRegistration = async (e) => {
   
 }
 
-useEffect(async () => {
-  try {
-      const facility_statusRes = await FacilityStatusService.getAllFacilityStatus();
-      setFacilityStatuses(facility_statusRes.data);
-      console.log(facility_statusRes)
-  } catch (error) {
-      
-  }finally{
+const { eID } = useParams();
+const [student, setStudent] = useState(null)
+// const [settings, setSettings] = useState()
 
-  }
+useEffect(()=>{
+    fetchStudent(eID)
 },[])
 
-useEffect(async () => {
-  try {
-      const facility_typeRes = await FacilityTypeService.getAllFacilityType();
-      setFacilityTypes(facility_typeRes.data);
-      console.log(facility_typeRes)
-  } catch (error) {
-      
-  }finally{
-
-  }
-},[])
-
-useEffect(async () => {
-  try {
-      const processingstagesRes = await ProcessingStageService.getAllProcessingStage();
-      setProcessingStages(processingstagesRes.data);
-      console.log(processingstagesRes)
-  } catch (error) {
-      
-  }finally{
-
-  }
-},[])
+const fetchStudent = async () => {
+  // await RegistrationService.getAllOneRegistration(formData)
+  // await BackendAPI.get(`/registration/${id}`).then(({data})=>{  
+  await BackendAPI.get(`/registration/5195383`).then(({data})=>{
+        setStudent(data)
+        console.log(data);
+    })
+}
 
   return (
 <div className="mt-100 mb-16">
+  <h3 style={{color:"green"}}>Currently Inspecting: {student?.data.facilityName} </h3>
 <Typography className="mb-10 font-medium text-14">KIV</Typography>
 <TextField 
  fullWidth
@@ -187,17 +167,7 @@ control={control}/>
                         onChange={(e) => setFacilityStatusID(e.value)}
                     />
 
-<br/><br/>
-<Typography className="mb-10 font-medium text-14">Processing Stage</Typography>
-<Select 
-                        fullWidth
-                        options={processingstages.map((processing_stage, index) => ({
-                            label: processing_stage.processingStage,
-                            value: processing_stage.processingStageID,
-                        }))}
-                        placeholder="Select Facility Status "
-                        onChange={(e) => setProcessingStageID(e.value)}
-                    />
+
 
 <Button
                         variant="contained"
@@ -215,4 +185,4 @@ control={control}/>
   );
 }
 
-export default memo(NewRegistration);
+export default memo(NewInspectionNextPage);

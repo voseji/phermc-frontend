@@ -10,6 +10,11 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { BackendAPI } from './services/api.utility';
+
+const current = new Date();
+const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
 const Root = styled('div')(({ theme }) => ({
   background: `radial-gradient(${darken(theme.palette.primary.dark, 0.5)} 0%, ${
@@ -29,7 +34,7 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
-function CompactInvoicePage() {
+function CompactInvoicePage(separator='') {
   const [invoice, setInvoice] = useState(null);
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -37,6 +42,24 @@ function CompactInvoicePage() {
     minimumFractionDigits: 2,
   });
 
+  const { eID } = useParams();
+	const [student, setStudent] = useState(null)
+	// const [settings, setSettings] = useState()
+
+	useEffect(()=>{
+    fetchStudent(eID)
+	},[])
+  
+  const [searchParams, setSearchParams] =useSearchParams()
+	const fetchStudent = async () => {
+    await BackendAPI.get(`/registration/${searchParams.get('eID')}`).then(({data})=>{
+      setStudent(data?.data)
+      // getData2(data.eID)
+      // getData2(image)
+      console.log(data);
+    })
+	}
+  
   useEffect(() => {
     axios
       .get('/api/invoices/get-invoice', {
@@ -47,20 +70,22 @@ function CompactInvoicePage() {
       });
   }, []);
 
+
   return (
-    <Root className="grow shrink-0 p-0 sm:p-64 print:p-0 overflow-auto">
+    <Root className="grow shrink-0 p-0 sm:p-10 print:p-0 overflow-auto">
       {invoice && (
         <motion.div
           initial={{ opacity: 0, y: 200 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ bounceDamping: 0 }}
         >
-          <Card className="mx-auto w-xl print:w-full print:p-8 print:shadow-none rounded-none sm:rounded-20">
+          <Card className="mx-auto w-xl print:w-full print:p-8 print:shadow-none rounded-none sm:rounded-10">
             <CardContent className="p-88 print:p-0">
               <Typography color="textSecondary" className="mb-32">
-                {invoice.date}
+                Date printed: {date}
               </Typography>
-
+<h1 style={{textAlign:"center"}}>FCT Health and Human Services Secretariat</h1>
+<h2 style={{textAlign:"center"}}>Department of Pharmaceutical Services</h2>
               <div className="flex justify-between">
                 <div>
                   <table className="mb-16">
@@ -68,7 +93,7 @@ function CompactInvoicePage() {
                       <tr>
                         <td className="pb-4">
                           <Typography className="font-light" variant="h6" color="textSecondary">
-                            INVOICE
+                          {student?.facilityName} INVOICE
                           </Typography>
                         </td>
                         <td className="pb-4 px-16">

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import {useForm, Controller} from "react-hook-form";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // import RegistrationService from './services/registration.service';
 import { useSnackbar } from 'notistack';
 import { BackendAPI } from './services/api.utility';
@@ -12,15 +12,17 @@ import Swal from 'sweetalert2';
 import MUIDataTable from "mui-datatables";
 // import RegistrationService from './services/registration.service';
 import moment from 'moment'
-
-
+import { Link } from 'react-router-dom';
+import ReactToPrint from 'react-to-print';
+import Receipt from './Receipt/receipt';
 
 
 export const Facilities = () =>{
-
+  const ref = useRef(null);
+  const [transactionToPrint, setTransactionToPrint] = useState(null);
   // const { columns: pColumns, rows: pRows } = projectsTableData();
 
-
+  // const getTotal = (params) => params.getValue(params.id, 'maths')  + params.getValue(params.eID)
   const columns = [
     // { label: "SN", name: "serialNumber" },
     {
@@ -34,7 +36,25 @@ export const Facilities = () =>{
     { label: "KIV", name: "KIV" },
     { label: "Rgistration Number", name: "registrationNumber" },
     { label: "Facility Name", name: "facilityName" },
-    // { label: "Manufacturer", name: "manufacturerId" },
+    // { label: "Action", name:'action', options: {
+    //   filter: false,
+    //   customBodyRender: (value) => {
+    //     return <ReactToPrint 
+    //               trigger={() => <a href="#">Print</a>}
+    //               content={() => ref.current}
+    //               onBeforeGetContent={async () =>{
+    //                 await setTransactionToPrint(sales.find(sale => sale.id === value))
+    //                 ref.current.classList.add('show')
+    //               }}
+    //               onAfterPrint={() => {
+    //                 ref.current.classList.remove('show')
+    //               }}
+    //             />
+    //   }
+    // } },
+{ label: "Action", name: "", options: {customBodyRender: (eID) => {
+      return <Link to={{pathname: `/dps/registration/print?eID=${eID}`, data:registration}} >Print</Link>
+    }} },
     // { label: "Landed Cost", name: "landedCost", options: {customBodyRender: (value) => {
     //   return `N${numeral(value).format('0,0.00')}`
     // }} },
@@ -72,6 +92,7 @@ export const Facilities = () =>{
                 registration.KIV,
                 registration.registrationNumber,
                 registration.facilityName,
+                registration.eID,
            
               ])}
               options={{
@@ -79,6 +100,11 @@ export const Facilities = () =>{
                 elevation: false,
               }}
              />
+  {/* <Receipt 
+                  printerRef={ref}
+                  eID={eID}
+                  transaction={transactionToPrint}
+                /> */}
 
 </div>
   );

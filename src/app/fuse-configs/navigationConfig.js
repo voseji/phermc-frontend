@@ -116,6 +116,20 @@ const navigationConfig = [
             url: 'dps/settings/processing_stage',
             icon: 'dynamic_feed',
           },
+          {
+            id: 'inspection_type',
+            title: 'Inspection Type',
+            type: 'item',
+            url: 'dps/settings/inspection_type',
+            icon: 'dynamic_feed',
+          },
+          {
+            id: 'teams',
+            title: 'Teams',
+            type: 'item',
+            url: 'dps/settings/list_teams',
+            icon: 'dynamic_feed',
+          },
      
         ],
       },

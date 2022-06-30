@@ -1,7 +1,6 @@
-
+import { Inspections } from '@fuse/core/DPS/Inspections';
 import { styled } from '@mui/material/styles';
 import FusePageCarded from '@fuse/core/FusePageCarded';
-import NewInspection from '@fuse/core/DPS/NewInspection';
 
 const Root = styled(FusePageCarded)({
   '& .FusePageCarded-header': {},
@@ -11,7 +10,7 @@ const Root = styled(FusePageCarded)({
   '& .FusePageCarded-sidebarContent': {},
 });
 
-function CardedFullWidthSample() {
+function AllFacilitiesX() {
   return (
     <Root
       header={
@@ -21,17 +20,17 @@ function CardedFullWidthSample() {
       }
       contentToolbar={
         <div className="px-24">
-          <h4>Inspect Facility</h4>
+          <h4>All Facilities</h4>
         </div>
       }
       content={
         <div className="p-24">
           
-          <NewInspection />
+          <Inspections />
         </div>
       }
     />
   );
 }
 
-export default CardedFullWidthSample;
+export default AllFacilitiesX;

@@ -13,6 +13,10 @@ import { useSnackbar } from 'notistack';
 import { handleAPIError } from './services/api.utility';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
+import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 
 const defaultValues = {
   Native     : "",
@@ -39,7 +43,10 @@ function NewRegistration() {
     mode: "onChange"
 });
 
-
+const KIVoptions = [
+  { value: 'Yes', label: 'Yes' },
+  { value: 'No', label: 'No' },
+];
 
 // const [eID, setManufacturers] = useState([])
 const [facilitystatuses, setFacilityStatuses] = useState([])
@@ -52,7 +59,10 @@ const [facilityType, setFacilityType] = useState("");
 const [facilityStatusID, setFacilityStatusID] = useState("");
 const [facilityTypeID, setFacilityTypeID] = useState("");
 const [processingStageID, setProcessingStageID] = useState("");
-// const [retailCost, setRetailCost] = useState(0);
+// const [processingStageDate, setProcessingStageDsate] = useState("");
+// const [processingStageDate, setProcessingStageDate] = React.useState(new Date());
+const [value, setValue] = React.useState(new Date());
+
 const [isLoading, setIsLoading] = useState(false)
 
 const {enqueueSnackbar} = useSnackbar()
@@ -63,8 +73,8 @@ const CreateOneRegistration = async (e) => {
       setIsLoading(true)
       const formData = new FormData()
   const generatedNumber= Math.ceil(5 + Math.random() * 9999999)
-
-  formData.append('eID', generatedNumber)
+  const uniqueGen="FCT-" + generatedNumber;
+  formData.append('eID', uniqueGen)
   formData.append('KIV', KIV)
   formData.append('registrationNumber', registrationNumber)
   formData.append('facilityName', facilityName)
@@ -72,6 +82,7 @@ const CreateOneRegistration = async (e) => {
   formData.append('facilityStatusID', facilityStatusID)
   formData.append('facilityTypeID', facilityTypeID)
   formData.append('processingStageID', processingStageID)
+  formData.append('processingStageDate', value)
 
   
   
@@ -134,14 +145,24 @@ useEffect(async () => {
 
   return (
 <div className="mt-100 mb-16">
-<Typography className="mb-10 font-medium text-14">KIV</Typography>
+{/* <Typography className="mb-10 font-medium text-14">KIV</Typography>
 <TextField 
  fullWidth
  value={KIV}
  placeholder="Enter KIV"
  onChange={(e) => setKIV(e.target.value)}
 name="TextField" 
-control={control}/>
+control={control}/> */}
+
+
+<br/><br/>
+<Typography className="mb-10 font-medium text-14">KIV</Typography>
+<Select 
+                        fullWidth
+                        options={KIVoptions}
+                        placeholder="Select Facility Type"
+                        onChange={(e) => setKIV(e.value)}
+/>
 
 <br/><br/>
 <Typography className="mb-10 font-medium text-14">Registration Number</Typography>
@@ -173,7 +194,7 @@ control={control}/>
                         }))}
                         placeholder="Select Facility Type "
                         onChange={(e) => setFacilityTypeID(e.value)}
-                    />
+/>
 
 <br/><br/>
 <Typography className="mb-10 font-medium text-14">Facility Status</Typography>
@@ -198,7 +219,29 @@ control={control}/>
                         placeholder="Select Facility Status "
                         onChange={(e) => setProcessingStageID(e.value)}
                     />
-
+<br/><br/>
+<Typography className="mb-10 font-medium text-14">Processing Stage Date</Typography>
+{/* <DatePicker
+// fullWidth
+// disableFuture
+label="Select Date"
+openTo="year"
+views={['year', 'month', 'day']}
+value={processingStageDate}
+onChange={(e) => setProcessingStageDate(e.value)}
+renderInput={(params) => <TextField {...params} />}
+        /> */}
+                <DesktopDatePicker
+          label="For desktop"
+          value={value}
+          minDate={new Date('2017-01-01')}
+          views={['year', 'month', 'day']}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+<br/><br/>
 <Button
                         variant="contained"
                         color="primary"
