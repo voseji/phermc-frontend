@@ -238,7 +238,7 @@ value: inspectiont.inspectionTypeID,
 <Select 
 fullWidth
 options={teams.map((teamt, index) => ({
-label: teamt.teamID,
+label: teamt.team,
 value: teamt.teamID,
 }))}
  placeholder="Select Inspection Team "

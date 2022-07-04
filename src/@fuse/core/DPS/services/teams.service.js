@@ -8,7 +8,12 @@ export default class TeamsService{
     static getOneTeam(eID, payload){
         return BackendAPI.get(`/teams/${teamID}`,payload);
         
-    }    
+    }   
+    
+    static getTeamMembers(eID, payload){
+        return BackendAPI.get(`/teams1/${teamID}`,payload);
+        
+    }
 
     static createTeam(payload){
         return BackendAPI.post('/teams',payload);

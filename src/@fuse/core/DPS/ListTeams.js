@@ -1,10 +1,11 @@
 import { memo } from 'react';
+import Icon from '@mui/material/Icon';
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import {useForm, Controller} from "react-hook-form";
-import React, { useState, useEffect } from 'react';
-// import RegistrationService from './services/registration.service';
+import React, { useState, useEffect, useRef } from 'react';
+import TeamsService from './services/teams.service';
 import { useSnackbar } from 'notistack';
 import { BackendAPI } from './services/api.utility';
 import Swal from 'sweetalert2';
@@ -12,12 +13,13 @@ import Swal from 'sweetalert2';
 import MUIDataTable from "mui-datatables";
 // import RegistrationService from './services/registration.service';
 import moment from 'moment'
-
+import { Link } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 
 
 export const ListTeam = () =>{
-
+  const ref = useRef(null);
   // const { columns: pColumns, rows: pRows } = projectsTableData();
 
 
@@ -32,10 +34,25 @@ export const ListTeam = () =>{
     },
     { label: "Team ID", name: "teamID" },
     { label: "Team Name", name: "team" },
+    { label: "Members", name: "", options: {customBodyRender: (teamID) => {
+      return <Icon color="primary"
+      component={Link}
+      to={{pathname: `/dps/settings/team_members?teamID=${teamID}`, data:teamdetails}}
+      >launch</Icon>
+      // <Icon color="primary">add_circle</Icon>
+      // <Icon color="primary"
+      // // component={Link}
+      // // // to='/path'
+      // // to={{pathname: `/dps/team_members/view?teamID=${teamID}`, data:teamdetails}}
+      // > 
+      // add_circle
+      // </Icon>
+      // // <Link to={{pathname: `/dps/team_members/view?teamID=${teamID}`, data:teamdetails}} ><Icon color="primary"> </Icon></Link>
+    }} },
 
 
   ];
-
+  const [searchParams, setSearchParams] =useSearchParams()
   const [team, setTeam] = useState([])
   useEffect(() => {
     getTeam()
@@ -47,6 +64,29 @@ export const ListTeam = () =>{
     })
   }
 
+  const [teamdetails, setAllTeamDetails] = useState([])
+ useEffect(()=>{
+    fetchAllTeamDetails()
+	},[])
+  const fetchAllTeamDetails = async () => {
+    await BackendAPI.get(`/teamsall1`).then(({data})=>{
+      // setFacilityType1(data?.data)
+      setAllTeamDetails(data)
+      console.log(data);
+    })
+	}
+
+  // const [facilitystatus1, setFacilityStatus1] = useState(null)
+  // useEffect(()=>{
+  //   fetchAllTeamDetails(teamID)
+	// },[])
+  // const fetchAllTeamDetails = async () => {
+  //   await BackendAPI.get(`/teams1/TID-41477`).then(({data})=>{
+  //     // setFacilityType1(data?.data)
+  //     setAllTeamDetails(data)
+  //     console.log(data);
+  //   })
+	// }
   return (
 <div className="mt-100 mb-16">
 
@@ -57,6 +97,7 @@ export const ListTeam = () =>{
                 team.createdAt,
                 team.teamID,
                 team.team,
+                team.teamID,
 
            
               ])}

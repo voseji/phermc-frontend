@@ -16,6 +16,9 @@ const InspectionType = lazy(() => import('./inspection_type'));
 const NewInspectionType = lazy(() => import('./new_inspection_type'));
 const NewTeam = lazy(() => import('./new_team'));
 const ListTeam = lazy(() => import('./list_teams'));
+const ListRegistrationTypes = lazy(() => import('./list_registration_types'));
+const NewRegistrationType = lazy(() => import('./new_registration_type'));
+const TeamMembers = lazy(() => import('./team_members'));
 
 const cardedLayoutRoutes = [
   {
@@ -81,6 +84,18 @@ const cardedLayoutRoutes = [
   {
     path: 'dps/settings/list_teams',
     element: <ListTeam />,
+  },
+  {
+    path: 'dps/settings/list_registration_types',
+    element: <ListRegistrationTypes />,
+  },
+  {
+    path: 'dps/settings/new_registration_type',
+    element: <NewRegistrationType />,
+  },
+  {
+    path: 'dps/settings/team_members',
+    element: <TeamMembers />,
   },
 ];
 

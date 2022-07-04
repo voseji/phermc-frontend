@@ -130,6 +130,14 @@ const navigationConfig = [
             url: 'dps/settings/list_teams',
             icon: 'dynamic_feed',
           },
+
+          {
+            id: 'registration_type',
+            title: 'Registration Type',
+            type: 'item',
+            url: 'dps/settings/list_registration_types',
+            icon: 'dynamic_feed',
+          },
      
         ],
       },

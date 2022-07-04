@@ -36,69 +36,51 @@ export const Facilities = () =>{
     { label: "KIV", name: "KIV" },
     { label: "Rgistration Number", name: "registrationNumber" },
     { label: "Facility Name", name: "facilityName" },
-    // { label: "Action", name:'action', options: {
-    //   filter: false,
-    //   customBodyRender: (value) => {
-    //     return <ReactToPrint 
-    //               trigger={() => <a href="#">Print</a>}
-    //               content={() => ref.current}
-    //               onBeforeGetContent={async () =>{
-    //                 await setTransactionToPrint(sales.find(sale => sale.id === value))
-    //                 ref.current.classList.add('show')
-    //               }}
-    //               onAfterPrint={() => {
-    //                 ref.current.classList.remove('show')
-    //               }}
-    //             />
-    //   }
-    // } },
-{ label: "Action", name: "", options: {customBodyRender: (eID) => {
-      return <Link to={{pathname: `/dps/registration/print?eID=${eID}`, data:registration}} >Print</Link>
+    { label: "Facility Type", name: "facilityType" },
+    { label: "Action", name: "", options: {customBodyRender: (eID) => {
+      return <Link to={{pathname: `/dps/registration/print?eID=${eID}`, data:allregdetails}} >Print</Link>
     }} },
-    // { label: "Landed Cost", name: "landedCost", options: {customBodyRender: (value) => {
-    //   return `N${numeral(value).format('0,0.00')}`
-    // }} },
-    // { label: "Mark Up", name: "markUp", options: {customBodyRender: (value) => {
-    //   return `N${numeral(value).format('0,0.00')}`
-    // }} },
-    // { label: "Retail Cost", name: "retailCost", options: {customBodyRender: (value) => {
-    //   return `N${numeral(value).format('0,0.00')}`
-    // }} },
-    // { label: "Discount", name: "discount", options: {customBodyRender: (value) => {
-    //   return `N${numeral(value).format('0,0.00')}`
-    // }} },
   ];
 
-  const [registration, setRegistration] = useState([])
-  useEffect(() => {
-    getRegistration()
-  }, [])
-  const getRegistration = async () => {
-    await BackendAPI.get(`/registration`).then(({ data }) => {
-      setRegistration(data)
+  // const [registration, setRegistration] = useState([])
+  // useEffect(() => {
+  //   getRegistration()
+  // }, [])
+  // const getRegistration = async () => {
+  //   await BackendAPI.get(`/registration`).then(({ data }) => {
+  //     setRegistration(data)
+  //     console.log(data);
+  //   })
+  // }
+
+  const [allregdetails, setAllRegDetails] = useState([])
+  useEffect(()=>{
+    fetchAllRegDetails()
+	},[])
+  const fetchAllRegDetails = async () => {
+    await BackendAPI.get(`/facility_type_all`).then(({data})=>{
+      // setFacilityType1(data?.data)
+      setAllRegDetails(data)
       console.log(data);
     })
-  }
-
+	}
+  
   return (
 <div className="mt-100 mb-16">
 
 <MUIDataTable 
               columns={columns}
-              data={registration.map((registration, index) => [
+              data={allregdetails.map((registration, index) => [
                 // index +1, 
                 registration.createdAt,
                 registration.eID,
                 registration.KIV,
                 registration.registrationNumber,
                 registration.facilityName,
+                registration?.facility_type.facilityType,
                 registration.eID,
            
               ])}
-              options={{
-                selectableRows: 'none',
-                elevation: false,
-              }}
              />
   {/* <Receipt 
                   printerRef={ref}

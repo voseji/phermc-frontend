@@ -1,7 +1,8 @@
-import { Facilities } from '@fuse/core/DPS/Facilities';
+// import Form from '@fuse/core/DPS';
 import { styled } from '@mui/material/styles';
 import FusePageCarded from '@fuse/core/FusePageCarded';
-import Button from '@mui/material/Button';
+
+import NewRegistrationType from '@fuse/core/DPS/NewRegistrationType';
 
 const Root = styled(FusePageCarded)({
   '& .FusePageCarded-header': {},
@@ -11,28 +12,27 @@ const Root = styled(FusePageCarded)({
   '& .FusePageCarded-sidebarContent': {},
 });
 
-function AllFacilitiesX() {
+function CardedFullWidthSample() {
   return (
     <Root
       header={
         <div className="py-24">
-     <h4>Registered Facilities</h4>
+          <h3>New Registration Type</h3>
         </div>
       }
       contentToolbar={
         <div className="px-24">
-          <Button href="dps/registration/new_registration" variant="contained">Register New facility</Button>
-          
+          <h4>Add New Registration Type</h4>
         </div>
       }
       content={
         <div className="p-24">
           
-          <Facilities />
+          <NewRegistrationType />
         </div>
       }
     />
   );
 }
 
-export default AllFacilitiesX;
+export default CardedFullWidthSample;

@@ -1,6 +1,8 @@
-import { Facilities } from '@fuse/core/DPS/Facilities';
+import { ListRegistrationTypes } from '@fuse/core/DPS/ListRegistrationTypes';
 import { styled } from '@mui/material/styles';
 import FusePageCarded from '@fuse/core/FusePageCarded';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 const Root = styled(FusePageCarded)({
@@ -16,19 +18,20 @@ function AllFacilitiesX() {
     <Root
       header={
         <div className="py-24">
-     <h4>Registered Facilities</h4>
+          <h3>Facility Registration Types</h3>
         </div>
       }
       contentToolbar={
         <div className="px-24">
-          <Button href="dps/registration/new_registration" variant="contained">Register New facility</Button>
-          
+              
+      <Button href="dps/settings/new_registration_type" variant="contained">Add New Registration Type</Button>
+{/* <h4 style={{textAlign:"center"}}>Facility Status</h4> */}
         </div>
       }
       content={
         <div className="p-24">
-          
-          <Facilities />
+      
+          <ListRegistrationTypes />
         </div>
       }
     />
