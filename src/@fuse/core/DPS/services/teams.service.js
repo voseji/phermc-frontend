@@ -15,7 +15,11 @@ export default class TeamsService{
         
     }
 
-    static createTeam(payload){
+    static createOneTeam(payload){
         return BackendAPI.post('/teams',payload);
     }
+    static createOneTeamMember(payload){
+        return BackendAPI.post('/team_members',payload);
+    }
+    
 }

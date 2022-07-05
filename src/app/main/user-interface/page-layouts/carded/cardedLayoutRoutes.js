@@ -19,6 +19,7 @@ const ListTeam = lazy(() => import('./list_teams'));
 const ListRegistrationTypes = lazy(() => import('./list_registration_types'));
 const NewRegistrationType = lazy(() => import('./new_registration_type'));
 const TeamMembers = lazy(() => import('./team_members'));
+const NewTeamMember = lazy(() => import('./new_team_member'));
 
 const cardedLayoutRoutes = [
   {
@@ -96,6 +97,10 @@ const cardedLayoutRoutes = [
   {
     path: 'dps/settings/team_members',
     element: <TeamMembers />,
+  },
+  {
+    path: 'dps/settings/new_team_member',
+    element: <NewTeamMember />,
   },
 ];
 

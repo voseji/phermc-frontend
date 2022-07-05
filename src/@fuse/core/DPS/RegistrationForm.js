@@ -50,6 +50,12 @@ const KIVoptions = [
   { value: 'No', label: 'No' },
 ];
 
+const urbanization = [
+  { value: 'RURAL', label: 'RURAL' },
+  { value: 'SEMI-URBAN', label: 'SEMI-URBAN' },
+  { value: 'URBAN', label: 'URBAN' },
+];
+
 // const [eID, setManufacturers] = useState([])
 const [facilitystatuses, setFacilityStatuses] = useState([])
 const [facilitytypes, setFacilityTypes] = useState([])
@@ -69,8 +75,13 @@ const [facilityEmail, setFacilityEmail] = useState("");
 const [facilityAddress, setAddress] = useState("");
 const [association, setAssociation] = useState("");
 const [coveringProfessional, setCoveringProfessional] = useState("");
+const [beds, setBeds] = useState("");
+const [urban, setUrbanization] = useState("");
+const [staff, setStaff] = useState("");
+const [docComplete, setDocComplete] = useState("");
 
 const [value, setValue] = React.useState(new Date());
+const [comp, setValue2] = React.useState(new Date());
 
 const [isLoading, setIsLoading] = useState(false)
 
@@ -103,6 +114,11 @@ const CreateOneRegistration = async (e) => {
   formData.append('facilityAddress', facilityAddress)
   formData.append('association', association)
   formData.append('coveringProfessional', coveringProfessional)
+  formData.append('beds', beds)
+  formData.append('urbanization', urban)
+  formData.append('staff', staff)
+  formData.append('docCompleteDate', comp)
+  formData.append('staffDocComplete', docComplete)
   
   
   const res1 = await RegistrationService.createRegistration(formData)
@@ -397,6 +413,59 @@ control={control}/>
  onChange={(e) => setCoveringProfessional(e.target.value)}
 name="TextField" 
 control={control}/>
+
+<br/><br/>
+<Typography className="mb-10 font-medium text-14">Beds</Typography>
+<TextField 
+ fullWidth
+ value={beds}
+ placeholder="Enter Bed Spaces Available"
+ onChange={(e) => setBeds(e.target.value)}
+name="TextField" 
+control={control}/>
+
+<br/><br/>
+<Typography className="mb-10 font-medium text-14">Staff Strength</Typography>
+<TextField 
+ fullWidth
+ value={staff}
+ placeholder="Enter Staff Count"
+ onChange={(e) => setStaff(e.target.value)}
+name="TextField" 
+control={control}/>
+
+<br/><br/>
+<Typography className="mb-10 font-medium text-14">Urbanization</Typography>
+<Select 
+                        fullWidth
+                        options={urbanization}
+                        placeholder="Select Urbanization Type"
+                        onChange={(e) => setUrbanization(e.value)}
+/>
+
+<br/><br/>
+<Typography className="mb-10 font-medium text-14">Staff Doc Complete</Typography>
+<Select 
+                        fullWidth
+                        options={KIVoptions}
+                        placeholder="Select Document Completion Status"
+                        onChange={(e) => setDocComplete(e.value)}
+/>
+
+
+<br/><br/>
+<Typography className="mb-10 font-medium text-14">Document Completion Date</Typography>
+<DesktopDatePicker
+          label="For desktop"
+          value={comp}
+          minDate={new Date('2017-01-01')}
+          views={['year', 'month', 'day']}
+          onChange={(newValue) => {
+            setValue2(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+
 
 <br/><br/>
 <Button

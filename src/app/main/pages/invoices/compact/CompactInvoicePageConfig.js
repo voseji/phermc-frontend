@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 
 const CompactInvoicePage = lazy(() => import('./RegistrationPrint'));
+const InspectionPrint = lazy(() => import('./InspectionPrint'));
 
 const CompactInvoicePageConfig = {
   settings: {
@@ -12,6 +13,10 @@ const CompactInvoicePageConfig = {
     {
       path: 'dps/registration/print',
       element: <CompactInvoicePage />,
+    },
+    {
+      path: 'dps/inspection/print',
+      element: <InspectionPrint />,
     },
   ],
 };

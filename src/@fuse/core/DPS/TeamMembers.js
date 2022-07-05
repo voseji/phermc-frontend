@@ -32,6 +32,8 @@ export const TeamMembers = () =>{
     },
     { label: "Team Name", name: "team" },
     { label: "Member Name", name: "member" },
+    { label: "Email", name: "email" },
+    { label: "Phone Number", name: "phoneNumber" },
     // { label: "Action", name: "", options: {customBodyRender: (eID) => {
     //   return <Link to={{pathname: `/dps/registration/print?eID=${eID}`, data:allregdetails}} >Print</Link>
     // }} },
@@ -59,8 +61,9 @@ export const TeamMembers = () =>{
                 // index +1, 
                 registration.createdAt,
                 registration.teams.team,
-                registration.memberID,
-                // registration.eID,
+                registration.name,
+                registration.email,
+                registration.phoneNumber,
            
               ])}
 

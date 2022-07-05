@@ -39,16 +39,7 @@ export const ListTeam = () =>{
       component={Link}
       to={{pathname: `/dps/settings/team_members?teamID=${teamID}`, data:teamdetails}}
       >launch</Icon>
-      // <Icon color="primary">add_circle</Icon>
-      // <Icon color="primary"
-      // // component={Link}
-      // // // to='/path'
-      // // to={{pathname: `/dps/team_members/view?teamID=${teamID}`, data:teamdetails}}
-      // > 
-      // add_circle
-      // </Icon>
-      // // <Link to={{pathname: `/dps/team_members/view?teamID=${teamID}`, data:teamdetails}} ><Icon color="primary"> </Icon></Link>
-    }} },
+ }} },
 
 
   ];

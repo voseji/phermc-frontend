@@ -58,12 +58,12 @@ const CreateOneTeam = async (e) => {
 
   
   
-  const res1 = await TeamsService.createOneTeam(formData)
+  const res1 = await TeamsService.createTeam(formData)
   Swal.fire({
       title: 'Success',
       text: 'Thank you. This Team has been successfully captured',
       icon: 'success',
-      confirmButtonText: '<a  href="dps/settings/list_teams">Ok</a>',
+      confirmButtonText: '<a  href="dps/settings/teams">Ok</a>',
    });
   } catch (error) {
       return enqueueSnackbar(handleAPIError(error),{

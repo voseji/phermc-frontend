@@ -15,7 +15,7 @@ import moment from 'moment'
 import { Link } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import Receipt from './Receipt/receipt';
-
+import Icon from '@mui/material/Icon';
 
 export const Facilities = () =>{
   const ref = useRef(null);
@@ -38,8 +38,15 @@ export const Facilities = () =>{
     { label: "Facility Name", name: "facilityName" },
     { label: "Facility Type", name: "facilityType" },
     { label: "Action", name: "", options: {customBodyRender: (eID) => {
-      return <Link to={{pathname: `/dps/registration/print?eID=${eID}`, data:allregdetails}} >Print</Link>
-    }} },
+      return <Icon color="primary"
+      component={Link}
+      to={{pathname: `/dps/registration/print?eID=${eID}`, data:allregdetails}}
+      >print</Icon>
+ }} },
+ 
+    // { label: "Action", name: "", options: {customBodyRender: (eID) => {
+    //   return <Link to={{pathname: `/dps/registration/print?eID=${eID}`, data:allregdetails}} >Print</Link>
+    // }} },
   ];
 
   // const [registration, setRegistration] = useState([])

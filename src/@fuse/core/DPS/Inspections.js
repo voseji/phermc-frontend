@@ -13,7 +13,7 @@ import MUIDataTable from "mui-datatables";
 // import RegistrationService from './services/registration.service';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-
+import Icon from '@mui/material/Icon';
 
 
 
@@ -35,9 +35,15 @@ export const Inspections = () =>{
     { label: "Inspection Type", name: "inspectionTypeID" },
     { label: "Team", name: "teamID" },
     // { label: "Facility Name", name: "facilityName" },
+    // { label: "Action", name: "", options: {customBodyRender: (inspectionId) => {
+    //   return <Link to={{pathname: `/dps/inspection/print?inspectionId=${inspectionId}`, data:allinspdetails}} >Print</Link>
+    // }} },
     { label: "Action", name: "", options: {customBodyRender: (inspectionId) => {
-      return <Link to={{pathname: `/dps/inspection/print?inspectionId=${inspectionId}`, data:allinspdetails}} >Print</Link>
-    }} },
+      return <Icon color="primary"
+      component={Link}
+      to={{pathname: `/dps/inspection/print?inspectionId=${inspectionId}`, data:allinspdetails}}
+      >print</Icon>
+ }} },
     // { label: "Team", name: "teamID" },
     // { label: "Landed Cost", name: "landedCost", options: {customBodyRender: (value) => {
     //   return `N${numeral(value).format('0,0.00')}`
@@ -53,16 +59,16 @@ export const Inspections = () =>{
     // }} },
   ];
 
-  const [inspection, setInspection] = useState([])
-  useEffect(() => {
-    getInspection()
-  }, [])
-  const getInspection = async () => {
-    await BackendAPI.get(`/inspection`).then(({ data }) => {
-      setInspection(data)
-      console.log(data);
-    })
-  }
+  // const [inspection, setInspection] = useState([])
+  // useEffect(() => {
+  //   getInspection()
+  // }, [])
+  // const getInspection = async () => {
+  //   await BackendAPI.get(`/inspection`).then(({ data }) => {
+  //     setInspection(data)
+  //     console.log(data);
+  //   })
+  // }
 
   const [allinspdetails, setAllInspDetails] = useState([])
   useEffect(()=>{
@@ -91,10 +97,7 @@ export const Inspections = () =>{
                 inspection.inspectionId,
            
               ])}
-              options={{
-                selectableRows: 'none',
-                elevation: false,
-              }}
+
              />
 
 </div>

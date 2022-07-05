@@ -36,7 +36,7 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
-function CompactInvoicePage(separator='') {
+function InspectionPrint(separator='') {
   const [invoice, setInvoice] = useState(null);
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -44,8 +44,8 @@ function CompactInvoicePage(separator='') {
     minimumFractionDigits: 2,
   });
 
-  const { eID } = useParams();
-	const [registration, setRegistration] = useState(null)
+  const { inspectionID } = useParams();
+	const [inspection, setInspection] = useState(null)
   const [facilitytype1, setFacilityType1] = useState(null)
   // const [facilitystatus1, setFacilityStatus1] = useState(null)
   const [processingstage1, setProcessingStage1] = useState(null)
@@ -54,21 +54,23 @@ function CompactInvoicePage(separator='') {
   const [docCompleteDate, setDocDate] = useState()
   // const dateToFormat2 = {docCompleteDate};
 
-	useEffect(()=>{
-    fetchRegistration(eID)
-	},[])
+	// useEffect(()=>{
+  //   fetchInspection(inspectionID)
+	// },[])
   
   const [searchParams, setSearchParams] =useSearchParams()
-	const fetchRegistration = async () => {
-    await BackendAPI.get(`/registration/${searchParams.get('eID')}`).then(({data})=>{
-      setRegistration(data?.data)
-      setDate(data?.data.processingStageDate)
-      setDocDate(data?.data.docCompleteDate)
-      // getData2(data.eID)
-      // getData2(image)
-      console.log(data);
-    })
-	}
+	// const fetchInspection = async () => {
+  //   await BackendAPI.get(`/inspectionall/${searchParams.get('inspectionID')}`)
+  //   .then(({data})=>{
+  //     // (data) => response.json()
+  //     setInspection(data.teams)
+  //     // setDate(data?.data.processingStageDate)
+  //     // setDocDate(data?.data.docCompleteDate)
+  //     // getData2(data.eID)
+  //     // getData2(image)
+  //     console.log(data.inspection_type);
+  //   })
+	// }
 
   // useEffect(()=>{
   //   fetchFacilityType(eID)
@@ -81,19 +83,19 @@ function CompactInvoicePage(separator='') {
   //   })
 	// }
   const [facilitystatus1, setFacilityStatus1] = useState(null)
-  const [facilitystatus2, setFacilityStatus2] = useState(null)
-  const [areacouncil, setAreaCouncil] = useState(null)
+  // const [facilitystatus2, setFacilityStatus2] = useState(null)
+  // const [areacouncil, setAreaCouncil] = useState(null)
   useEffect(()=>{
-    fetchFacilityStatus(eID)
+    fetchFacilityStatus(inspectionID)
 	},[])
   const fetchFacilityStatus = async () => {
-    await BackendAPI.get(`/registration_all/${searchParams.get('eID')}`).then(({data})=>{
+    await BackendAPI.get(`/inspection_all/${searchParams.get('inspectionID')}`).then(({data})=>{
       // setFacilityType1(data?.data)
       setFacilityStatus1(data)
-      setFacilityStatus2(data.districts)
-      setAreaCouncil(data.districts.area_council)
+      // setFacilityStatus2(data.districts)
+      // setAreaCouncil(data.districts.area_council)
 
-      console.log(data.districts.area_council);
+      console.log(data);
     })
 	}
 
@@ -252,7 +254,7 @@ function CompactInvoicePage(separator='') {
   );
 }
 
-export default CompactInvoicePage;
+export default InspectionPrint;
 
 /**
 

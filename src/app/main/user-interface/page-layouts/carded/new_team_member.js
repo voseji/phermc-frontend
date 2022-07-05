@@ -1,9 +1,8 @@
-import { TeamMembers } from '@fuse/core/DPS/TeamMembers';
+
 import { styled } from '@mui/material/styles';
 import FusePageCarded from '@fuse/core/FusePageCarded';
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+// import NewInspection from '@fuse/core/DPS/NewInspection';
+import NewTeamMember from '@fuse/core/DPS/NewTeamMember';
 
 const Root = styled(FusePageCarded)({
   '& .FusePageCarded-header': {},
@@ -13,29 +12,27 @@ const Root = styled(FusePageCarded)({
   '& .FusePageCarded-sidebarContent': {},
 });
 
-function AllFacilitiesX() {
+function CardedFullWidthSample() {
   return (
     <Root
       header={
         <div className="py-24">
-          <h3>Facility Inspection Teams Members</h3>
+          <h3>Team Members</h3>
         </div>
       }
       contentToolbar={
         <div className="px-24">
-              
-      <Button href="dps/settings/new_team_member" variant="contained">Add New Team Member</Button>
-{/* <h4 style={{textAlign:"center"}}>Facility Status</h4> */}
+          <h4>Add Team Member</h4>
         </div>
       }
       content={
         <div className="p-24">
-      
-          <TeamMembers />
+          
+          <NewTeamMember />
         </div>
       }
     />
   );
 }
 
-export default AllFacilitiesX;
+export default CardedFullWidthSample;
